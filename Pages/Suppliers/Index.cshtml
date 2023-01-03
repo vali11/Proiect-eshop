@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int?}"
 @model Proiect_eshop.Pages.Suppliers.IndexModel
 
 @{
@@ -26,8 +26,13 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Supplier) {
-        <tr>
+@foreach (var item in Model.SupplierData.Suppliers) {
+            string selectedRow = "";
+            if (item.ID == Model.SupplierID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
             <td>
                 @Html.DisplayFor(modelItem => item.SupplierName)
             </td>
@@ -38,6 +43,7 @@
                 @Html.DisplayFor(modelItem => item.TIN)
             </td>
             <td>
+                <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
@@ -46,3 +52,34 @@
 }
     </tbody>
 </table>
+
+@if (Model.SupplierData.Products != null)
+{
+    <h3>Products managed by selected Supplier</h3>
+    <table class="table">
+
+        @foreach (var item in Model.SupplierData.Suppliers)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.SupplierID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+
+                <td>
+                    @{
+                        foreach (var p in item.Products)
+                        {
+
+                            @p.Name @: 
+
+                            <br />
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
