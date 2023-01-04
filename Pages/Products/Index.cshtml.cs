@@ -19,7 +19,7 @@ namespace Proiect_eshop.Pages.Products
             _context = context;
         }
 
-        public IList<Product> Product { get;set; } = default!;
+        public IList<Product> Product { get; set; } = default!;
         public ProductData ProductD { get; set; }
         public int ProductID { get; set; }
         public int CategoryID { get; set; }
@@ -43,18 +43,19 @@ namespace Proiect_eshop.Pages.Products
                || s.Name.Contains(searchString));
 
                 if (id != null) { ProductID = id.Value; Product product = ProductD.Products.Where(i => i.ID == id.Value).Single(); ProductD.Categories = product.ProductCategories.Select(s => s.Category); }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    ProductD.Products = ProductD.Products.OrderByDescending(s => s.Name);
-                    break;
-                case "price_desc":
-                    ProductD.Products = ProductD.Products.OrderByDescending(s => s.Price);
-                    break;
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        ProductD.Products = ProductD.Products.OrderByDescending(s => s.Name);
+                        break;
+                    case "price_desc":
+                        ProductD.Products = ProductD.Products.OrderByDescending(s => s.Price);
+                        break;
+
+                }
 
             }
 
         }
-
     }
 }

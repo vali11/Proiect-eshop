@@ -70,6 +70,16 @@
                     }
                 </td>
                 <td>
+                    @{
+                        var imagePath = @"app-images/" + item.Name + ".jpg";
+                    }
+
+                    <img src="@imagePath"
+                     style="width: 150px; border: 2px solid #5bc0de;"
+                     class="img"
+                     alt="Fotografie produs">
+                <td>
+                <td>
                     <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
                     <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
