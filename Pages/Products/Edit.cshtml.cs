@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +13,8 @@ using Proiect_eshop.Models;
 
 namespace Proiect_eshop.Pages.Products
 {
+    [Authorize(Roles = "Admin")]
+
     public class EditModel : ProductCategoriesPageModel
     {
         private readonly Proiect_eshop.Data.Proiect_eshopContext _context;
