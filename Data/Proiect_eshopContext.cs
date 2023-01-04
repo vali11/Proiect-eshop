@@ -19,5 +19,9 @@ namespace Proiect_eshop.Data
         public DbSet<Proiect_eshop.Models.Supplier> Supplier { get; set; }
 
         public DbSet<Proiect_eshop.Models.Category> Category { get; set; }
+
+        public DbSet<Proiect_eshop.Models.Member> Member { get; set; }
+
+        public DbSet<Proiect_eshop.Models.Order> Order { get; set; }
     }
 }

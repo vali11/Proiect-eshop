@@ -1,0 +1,50 @@
+﻿@page
+@model Proiect_eshop.Pages.Orders.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Order.ID" />
+            <div class="form-group">
+                <label asp-for="Order.MemberID" class="control-label"></label>
+                <select asp-for="Order.MemberID" class="form-control" asp-items="ViewBag.MemberID"></select>
+                <span asp-validation-for="Order.MemberID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.ProductID" class="control-label"></label>
+                <select asp-for="Order.ProductID" class="form-control" asp-items="ViewBag.ProductID"></select>
+                <span asp-validation-for="Order.ProductID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.PlacementDate" class="control-label"></label>
+                <input asp-for="Order.PlacementDate" class="form-control" />
+                <span asp-validation-for="Order.PlacementDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Quantity" class="control-label"></label>
+                <input asp-for="Order.Quantity" class="form-control" />
+                <span asp-validation-for="Order.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

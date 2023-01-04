@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_eshop.Data;
 
@@ -11,9 +12,10 @@ using Proiect_eshop.Data;
 namespace Proiect_eshop.Migrations
 {
     [DbContext(typeof(Proiect_eshopContext))]
-    partial class Proiect_eshopContextModelSnapshot : ModelSnapshot
+    [Migration("20230104103851_Orders")]
+    partial class Orders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
