@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proiect_eshop.Data;
 using Proiect_eshop.Models;
+using Proiect_eshop.Models.ViewModels;
 
 namespace Proiect_eshop.Pages.Categories
 {
@@ -21,11 +22,25 @@ namespace Proiect_eshop.Pages.Categories
 
         public IList<Category> Category { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public CategoryIndexData CategoryData { get; set; }
+        public int CategoryID { get; set; }
+        public int ProductID { get; set; }
+
+        public async Task OnGetAsync(int? id, int? BookID)
         {
-            if (_context.Category != null)
+            CategoryData = new CategoryIndexData();
+            CategoryData.Categories = await _context.Category
+            .Include(i => i.ProductCategories)
+            .ThenInclude(i => i.Product)
+            .ThenInclude(i => i.Supplier)
+            .OrderBy(i => i.CategoryName)
+            .ToListAsync();
+            if (id != null)
             {
-                Category = await _context.Category.ToListAsync();
+                CategoryID = id.Value;
+                Category category = CategoryData.Categories
+                .Where(i => i.ID == id.Value).Single();
+                CategoryData.ProductCategories = category.ProductCategories;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int?}"
 @model Proiect_eshop.Pages.Categories.IndexModel
 
 @{
@@ -21,7 +21,13 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Category) {
-        <tr>
+            string selectedRow = "";
+            if (item.ID == Model.CategoryID)
+            {
+                selectedRow = "table-success";
+            }
+
+            <tr class="@selectedRow">
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
@@ -34,3 +40,29 @@
 }
     </tbody>
 </table>
+
+@if (Model.CategoryData.ProductCategories != null)
+{
+    <h3>Products in Selected Category</h3>
+    <table class="table">
+        @foreach (var item in Model.CategoryData.Categories)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.CategoryID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @{
+                        foreach (var b in item.ProductCategories)
+                        {
+                            @b.Product.Name @: @b.Product.Supplier.SupplierName
+                            <br />
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
